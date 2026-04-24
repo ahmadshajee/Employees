@@ -1,6 +1,6 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
-import { EmailLog, toObjectId } from "@/lib/models";
+import { EmailLog, Lead, toObjectId } from "@/lib/models";
 import { requireUserId } from "@/lib/api";
 
 export async function GET() {
@@ -29,6 +29,22 @@ export async function POST(request: NextRequest) {
     body: body.body,
     status: "Sent",
   });
+
+  if (typeof body.leadId === "string" && body.leadId) {
+    const subject = body.subject ? String(body.subject).trim() : "Email sent";
+    await Lead.findOneAndUpdate(
+      { _id: toObjectId(body.leadId), userId: toObjectId(userId) },
+      {
+        $push: {
+          logs: {
+            type: "email",
+            note: `Email sent — ${subject}`,
+            createdAt: new Date(),
+          },
+        },
+      },
+    );
+  }
 
   return NextResponse.json(email, { status: 201 });
 }

@@ -1,0 +1,21 @@
+employee-tracker-next run commands
+
+1. Open a terminal in this folder:
+   cd c:\Users\ahmad\Desktop\Website2\employee-tracker-next
+
+2. Install dependencies if needed:
+   npm install
+
+3. Start the development server:
+   npm run dev
+
+4. Open the site in your browser:
+   http://localhost:3000
+
+Optional production commands:
+
+5. Build the app:
+   npm run build
+
+6. Start the production server:
+   npm run start
