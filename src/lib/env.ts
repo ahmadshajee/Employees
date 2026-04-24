@@ -7,9 +7,16 @@ function getRequiredEnv(name: string): string {
 }
 
 export const env = {
-  MONGODB_URI: getRequiredEnv("MONGODB_URI"),
-  NEXTAUTH_SECRET: getRequiredEnv("NEXTAUTH_SECRET"),
-  NEXTAUTH_URL:
-    process.env.NEXTAUTH_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+  get MONGODB_URI(): string {
+    return getRequiredEnv("MONGODB_URI");
+  },
+  get NEXTAUTH_SECRET(): string {
+    return getRequiredEnv("NEXTAUTH_SECRET");
+  },
+  get NEXTAUTH_URL(): string | undefined {
+    return (
+      process.env.NEXTAUTH_URL ??
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined)
+    );
+  },
 };
