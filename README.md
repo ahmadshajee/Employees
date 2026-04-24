@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Employee Tracker (Next.js + MongoDB)
 
-## Getting Started
+This is a fully functional clone of the provided employee tracker demo, rebuilt with Next.js App Router, NextAuth credentials login, and MongoDB persistence.
 
-First, run the development server:
+Each login account gets isolated data. Records created by one user are not visible in another user's workspace.
+
+## Implemented Features
+
+- Authentication: register/login/logout with hashed passwords.
+- Dashboard: stats cards and lead pipeline summary.
+- Workspace: create and persist
+	- leads
+	- daily activity reports
+	- deal closures
+	- follow-up logs
+	- expense reports
+	- email logs
+	- attendance rows
+- Leaderboard: computed from saved user activity.
+- My History: unified timeline across form submissions.
+- Calendar data: attendance entries grouped by month.
+
+## Tech Stack
+
+- Next.js 16 (App Router, TypeScript)
+- MongoDB + Mongoose
+- NextAuth (Credentials provider)
+- Tailwind CSS
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy env file and set values:
+
+```bash
+cp .env.example .env.local
+```
+
+Required values:
+
+- `MONGODB_URI`
+- `NEXTAUTH_URL`
+- `NEXTAUTH_SECRET`
+
+3. Run in development:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API Overview
 
-## Learn More
+- `POST /api/register`
+- `GET|POST /api/leads`
+- `GET|POST /api/daily-reports`
+- `GET|POST /api/deals`
+- `GET|POST /api/followups`
+- `GET|POST /api/expenses`
+- `GET|POST /api/emails`
+- `GET|POST /api/attendance`
+- `GET /api/dashboard`
+- `GET /api/history`
+- `GET /api/leaderboard`
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All routes except register/auth require a valid session.
