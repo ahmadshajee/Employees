@@ -56,6 +56,17 @@ For production deployments, set secrets in Vercel project settings (or via `verc
 - Set `NEXTAUTH_SECRET` in Vercel Environment Variables.
 - Optionally set `NEXTAUTH_URL` if you want an explicit canonical auth URL.
 
+## Vercel Deployment Checklist
+
+- Framework Preset: `Next.js`
+- Root Directory: repository root for this app (`employee-tracker-next`)
+- Build Command: `npm run build`
+- Output Directory: leave empty/default (do not set a custom output directory)
+- Install Command: `npm install`
+- Node.js Version: `20.x`
+
+If you previously set a custom Output Directory in Vercel, clear it and redeploy.
+
 3. Run in development:
 
 ```bash
