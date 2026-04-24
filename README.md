@@ -44,8 +44,17 @@ cp .env.example .env.local
 Required values:
 
 - `MONGODB_URI`
-- `NEXTAUTH_URL`
 - `NEXTAUTH_SECRET`
+
+`NEXTAUTH_URL` is optional when deploying to Vercel because the app can derive the host URL from `VERCEL_URL`.
+
+## Vercel Environment Variables (Recommended)
+
+For production deployments, set secrets in Vercel project settings (or via `vercel env`) instead of committing any `.env` file.
+
+- Set `MONGODB_URI` in Vercel Environment Variables.
+- Set `NEXTAUTH_SECRET` in Vercel Environment Variables.
+- Optionally set `NEXTAUTH_URL` if you want an explicit canonical auth URL.
 
 3. Run in development:
 

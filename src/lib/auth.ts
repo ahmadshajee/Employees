@@ -3,9 +3,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { connectToDatabase } from "@/lib/db";
+import { env } from "@/lib/env";
 import { User } from "@/lib/models";
 
 export const authOptions: NextAuthOptions = {
+  secret: env.NEXTAUTH_SECRET,
+  trustHost: true,
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
   providers: [
